@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+<h:head/>
+<h:body>
+    <h2>#{sportsStudents.sport.name} students:</h2>
+    <ol>
+        <ui:repeat value="#{sportsStudents.sport.students}" var="student">
+            <li>
+                <h:link value="#{student.name} #{student.surname}"  outcome="StudentsSports?studentId=#{student.id}"/>
+            </li>
+        </ui:repeat>
+    </ol>
+    <h:link outcome="index" value="Back to index page"/>
+</h:body>
+</html>

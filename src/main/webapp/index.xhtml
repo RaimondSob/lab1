@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head/>
+<h:body>
+   <h2>Universities:</h2>
+   <ol>
+      <ui:repeat value="#{universities.allUniversities}" var="university">
+         <li><h:link value="#{university.name}" outcome="students?universityId=#{university.id}" /></li>
+      </ui:repeat>
+   </ol>
+   <h:form>
+      <h:inputText value="#{universities.universityToCreate.name}" required="true" />
+      <h:inputText value="#{universities.universityToCreate.fakultetas}" required="true" />
+      <h:commandButton value="Add new university" actionListener="#{universities.createUniversity}" action="index?faces-redirect=true"/>
+   </h:form>
+   <h2>Sports:</h2>
+   <ol>
+      <ui:repeat value="#{sports.allSports}" var="sport">
+         <li><h:link value="#{sport.name}" outcome="SportsStudents?sportId=#{sport.id}" /></li>
+      </ui:repeat>
+   </ol>
+   <h:form>
+      <h:inputText value="#{sports.sportToCreate.name}" required="true" />
+      <h:commandButton value="Add new sport" actionListener="#{sports.createSport}" action="index?faces-redirect=true"/>
+   </h:form>
+   <h:link outcome="myBatis/universities" value="MyBatis implementation"/>
+</h:body>
+</html>
