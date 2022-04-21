@@ -9,34 +9,33 @@
 <h:head/>
 <h:body>
     <h2>#{studentsSports.student.name} #{studentsSports.student.surname} sports:</h2>
-    <ol>
-        <ui:repeat value="#{studentsSports.student.sports}" var="sport">
-            <li>
-                <h:link value="#{sport.name}"  outcome="SportsStudents?sportId=#{sport.id}"/>
-            </li>
-        </ui:repeat>
-    </ol>
     <h:form>
-        <h:inputText a:placeholder="name" value="#{studentsSports.sportToAddId}" required="true" />
-        <h:commandButton value="Add sport"
-                         actionListener="#{studentsSports.addSport()}"
-                         action="#{'StudentsSports?faces-redirect=true&amp;studentId='.concat(studentsSports.student.id)}">
-            <f:param name="studentId" value="#{studentsSports.student.id}" />
-        </h:commandButton>
-        <!--h:link outcome="#{'students?studentId='.concat(studentsCourses.student.id)}" value="Back to student page"/-->
-        <h:link outcome="index" value="Back to index page"/>
-
+        <ol>
+            <ui:repeat value="#{studentsSports.student.sports}" var="sport">
+                <li>
+                    <h:link value="#{sport.name}" outcome="SportsStudents?sportId=#{sport.id}"/>
+                    <h:commandButton value="Remove sport"
+                                     action="#{'StudentsSports?faces-redirect=true&amp;studentId='.concat(studentsSports.student.id)}">
+                        <f:actionListener binding="#{studentsSports.setSportToRemoveId(sport.id)}"/>
+                        <f:actionListener binding="#{studentsSports.removeSport()}"/>
+                        <f:param name="studentId" value="#{studentsSports.student.id}"/>
+                    </h:commandButton>
+                </li>
+            </ui:repeat>
+        </ol>
     </h:form>
-    <h:form>
-        <h:inputText a:placeholder="name" value="#{studentsSports.sportToRemoveId}" required="true" />
-        <h:commandButton value="Remove sport"
-                         actionListener="#{studentsSports.removeSport()}"
-                         action="#{'StudentsSports?faces-redirect=true&amp;studentId='.concat(studentsSports.student.id)}">
-            <f:param name="studentId" value="#{studentsSports.student.id}" />
-        </h:commandButton>
-        <!--h:link outcome="#{'students?studentId='.concat(studentsCourses.student.id)}" value="Back to student page"/-->
-        <h:link outcome="index" value="Back to index page"/>
-
+    <h:form>All Sports:
+        <ol>
+            <ui:repeat value="#{sports.allSports}" var="sport">
+                <li><h:link value="#{sport.name}" outcome="SportsStudents?sportId=#{sport.id}"/></li>
+                <h:commandButton value="Add sport"
+                                 action="#{'StudentsSports?faces-redirect=true&amp;studentId='.concat(studentsSports.student.id)}">
+                    <f:actionListener binding="#{studentsSports.setSportToAddId(sport.id)}"/>
+                    <f:actionListener binding="#{studentsSports.addSport()}"/>
+                    <f:param name="studentId" value="#{studentsSports.student.id}"/>
+                </h:commandButton>
+            </ui:repeat>
+        </ol>
     </h:form>
 </h:body>
 </html>
