@@ -3,6 +3,7 @@ package com.example.lab1.entities;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import lombok.EqualsAndHashCode;
 
@@ -14,6 +15,10 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
 public class University {
+
+    public University(){
+
+    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
@@ -27,6 +32,20 @@ public class University {
         return id;
     }
 
+    public Long sport;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        University university = (University) o;
+        return Objects.equals(id, university.id) && Objects.equals(sport, university.sport) && Objects.equals(students, university.students);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, sport, students);
+    }
 
 
     private String name;

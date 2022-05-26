@@ -12,6 +12,7 @@
         <ui:repeat value="#{studentsForUniversity.university.students}" var="student">
             <li>
                 <h:link value="#{student.name} #{student.surname}" outcome="StudentsSports?studentId=#{student.id}" />
+                <h:link value="  update" outcome="studentDetails?studentId=#{student.id}" />
             </li>
         </ui:repeat>
     </ol>

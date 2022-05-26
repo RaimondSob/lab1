@@ -2,6 +2,7 @@ package com.example.lab1.usecases;
 
 import com.example.lab1.entities.Sport;
 import com.example.lab1.entities.Student;
+import com.example.lab1.interceptors.LoggedInvocation;
 import com.example.lab1.persistence.SportsDAO;
 import com.example.lab1.persistence.StudentsDAO;
 import lombok.Getter;
@@ -43,13 +44,16 @@ public class StudentsSports {
         this.student = studentsDAO.findOne(studentId);
     }
 
+    @LoggedInvocation
     @Transactional
-    public void addSport(){
+    public String addSport(){
         this.sportToAdd = sportsDAO.findById(sportToAddId);
         if(!student.getSports().contains(sportToAdd)){
             student.getSports().add(sportToAdd);
         }
         studentsDAO.update(student);
+
+        return "StudentsSports?faces-redirect=true&amp;studentId="+student.getId();
     }
 
     @Transactional

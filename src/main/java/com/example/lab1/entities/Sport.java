@@ -9,6 +9,8 @@ import java.util.List;
 })
 @Table(name = "SPORT")
 public class Sport {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
